@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.MessageDigest;
 
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -50,6 +51,12 @@ public class ImageServiceImpl implements ImageService {
 
 	@Override
 	public String getImageHashFromText(String text) throws Exception {
+		text = Strings.trimToNull(text);
+		if(!text.startsWith("@startuml"))
+			text = "@startuml\n" + text;
+		if(!text.endsWith("@enduml"))
+			text = "@enduml" + text;
+		
 		String hash = getHash(text);
 		String path = HASH_FILE_DIR + File.pathSeparator + hash + ".png";
 

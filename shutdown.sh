@@ -1,7 +1,7 @@
 #!/bin/bash
 
 VERSION=0.0.1
-ACTUATOR_PORT=61100
+ACTUATOR_PORT=50001
 APP_NAME=image_generate_service
 
 PID="$(jps|grep $APP_NAME-$VERSION.jar|grep -v grep|awk '{print $2}')"
