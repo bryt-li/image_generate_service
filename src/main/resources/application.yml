@@ -1,0 +1,27 @@
+server:
+  port: 50000
+  
+spring:
+  profiles:
+    active: local
+  application:
+    name: image_generate_service
+  autoconfigure:
+    exclude:
+    - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+    - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+    
+logging:
+  path: /logs/image_generate_service
+
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+  server:
+    address: 127.0.0.1
+    port: 50001
+  endpoints:
+    web:
+      exposure:
+        include: ["health","info","shutdown"]
