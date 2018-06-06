@@ -55,7 +55,7 @@ public class ImageServiceImpl implements ImageService {
 		if(!text.startsWith("@startuml"))
 			text = "@startuml\n" + text;
 		if(!text.endsWith("@enduml"))
-			text = "@enduml" + text;
+			text =  text + "\n@enduml";
 		
 		String hash = getHash(text);
 		String path = HASH_FILE_DIR + File.pathSeparator + hash + ".png";
