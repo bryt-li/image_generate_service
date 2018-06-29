@@ -52,10 +52,6 @@ public class ImageServiceImpl implements ImageService {
 	@Override
 	public String getImageHashFromText(String text) throws Exception {
 		text = Strings.trimToNull(text);
-		if(!text.startsWith("@startuml"))
-			text = "@startuml\n" + text;
-		if(!text.endsWith("@enduml"))
-			text =  text + "\n@enduml";
 		
 		String hash = getHash(text);
 		String path = HASH_FILE_DIR + File.pathSeparator + hash + ".png";
@@ -68,7 +64,7 @@ public class ImageServiceImpl implements ImageService {
 		}
 
 		if (!Files.exists(f)) {
-			if (text.trim().startsWith("@startuml")) {
+			if (text.trim().startsWith("@start")) {
 				generatePlantumlImage(text, path);
 			} else if (text.trim().startsWith("<?xml version=\"1.0\" encoding=\"UTF-8\"?>")) {
 				activitiService.generateActivitiImage(text, path);
